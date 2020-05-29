@@ -527,13 +527,15 @@ int getStickTrimValue(int stick, int stickValue)
     return 0;
 
   int trim = trims[stick];
-  if (stick == THR_STICK) {
-    if (g_model.thrTrim) {
-      int trimMin = g_model.extendedTrims ? 2*TRIM_EXTENDED_MIN : 2*TRIM_MIN;
-      trim = ((g_model.throttleReversed ? (trim+trimMin) : (trim-trimMin)) * (RESX-stickValue)) >> (RESX_SHIFT+1);
-    }
-    if (g_model.throttleReversed) {
+  if (g_model.throttleReversed) {
       trim = -trim;
+  }
+  if (stick == g_model.thrTrimSw) {
+    if (g_model.thrTrim) {
+      trim = 2*TRIM_MAX + trim;
+      int newTrim = 0;
+      if (stickValue < 0) newTrim = - trim * stickValue / RESX;
+      trim = newTrim;
     }
   }
   return trim;
