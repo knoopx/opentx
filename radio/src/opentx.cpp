@@ -2131,6 +2131,8 @@ uint32_t pwrPressedDuration()
   }
 }
 
+bool pwr_trigger_au_model_still_powered = false;
+  
 uint32_t pwrCheck()
 {
   const char * message = nullptr;
@@ -2155,9 +2157,7 @@ uint32_t pwrCheck()
     }
     else if (pwr_press_time == 0) {
       pwr_press_time = get_tmr10ms();
-      if (message && !g_eeGeneral.disableRssiPoweroffAlarm) {
-        audioEvent(AU_MODEL_STILL_POWERED);
-      }
+      pwr_trigger_au_model_still_powered = TELEMETRY_STREAMING() && !g_eeGeneral.disableRssiPoweroffAlarm;
     }
     else {
       inactivity.counter = 0;
@@ -2200,6 +2200,10 @@ uint32_t pwrCheck()
         return e_power_off;
       }
       else {
+        if (pwr_trigger_au_model_still_powered) {
+          audioEvent(AU_MODEL_STILL_POWERED);
+          pwr_trigger_au_model_still_powered = false;
+        }
         drawShutdownAnimation(pwrPressedDuration(), PWR_PRESS_SHUTDOWN_DELAY(), message);
         return e_power_press;
       }
