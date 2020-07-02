@@ -20,11 +20,11 @@
 
 #include "opentx.h"
 
-#if defined(RADIO_T12)
+//#if defined(RADIO_T12)
   #define LCD_CONTRAST_OFFSET            -10
-#else
-  #define LCD_CONTRAST_OFFSET            160
-#endif
+//#else
+//  #define LCD_CONTRAST_OFFSET            160
+// #endif
 #define RESET_WAIT_DELAY_MS            300 // Wait time after LCD reset before first command
 #define WAIT_FOR_DMA_END()             do { } while (lcd_busy)
 
@@ -107,10 +107,10 @@ void lcdHardwareInit()
 #if LCD_W == 128
 void lcdStart()
 {
-#if defined(RADIO_T12)
+//#if defined(RADIO_T12)
   // Jumper has the screen inverted.
   lcdWriteCommand(0xe2); // (14) Soft reset
-  lcdWriteCommand(0xa0); // Set seg
+  lcdWriteCommand(0xa1); // Set seg
   lcdWriteCommand(0xc8); // Set com
   lcdWriteCommand(0xf8); // Set booster
   lcdWriteCommand(0x00); // 5x
@@ -121,7 +121,7 @@ void lcdStart()
   lcdWriteCommand(0x81); // Set contrast
   lcdWriteCommand(0x0A); // Set Vop
   lcdWriteCommand(0xa6); // Set display mode
-#else
+/*#else
   lcdWriteCommand(0xe2); // (14) Soft reset
   lcdWriteCommand(0xa1); // Set seg
   lcdWriteCommand(0xc0); // Set com
@@ -133,7 +133,7 @@ void lcdStart()
   lcdWriteCommand(0x81); // Set contrast
   lcdWriteCommand(0x36); // Set Vop
   lcdWriteCommand(0xa6); // Set display mode
-#endif
+#endif*/
 }
 #else
 void lcdStart()
@@ -198,12 +198,13 @@ void lcdRefresh(bool wait)
 
 #if LCD_W == 128
   uint8_t * p = displayBuf;
+  lcdWriteCommand(2 & 0xf);
   for (uint8_t y=0; y < 8; y++, p+=LCD_W) {
     lcdWriteCommand(0x10); // Column addr 0
     lcdWriteCommand(0xB0 | y); // Page addr y
-#if !defined(RADIO_T12)
+/*#if !defined(RADIO_T12)
     lcdWriteCommand(0x04);
-#endif
+#endif*/
 
     LCD_NCS_LOW();
     LCD_A0_HIGH();
