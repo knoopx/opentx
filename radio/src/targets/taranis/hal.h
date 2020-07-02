@@ -68,6 +68,10 @@
   #define KEYS_GPIO_PIN_EXIT            GPIO_Pin_2  // PD.02
   #define KEYS_GPIO_REG_ENTER           GPIOE->IDR
   #define KEYS_GPIO_PIN_ENTER           GPIO_Pin_10 // PE.10
+  #define KEYS_GPIO_REG_PLUS            GPIOE->IDR
+  #define KEYS_GPIO_PIN_PLUS            GPIO_Pin_9  // PE.09
+  #define KEYS_GPIO_REG_MINUS           GPIOE->IDR
+  #define KEYS_GPIO_PIN_MINUS           GPIO_Pin_11 // PE.11
 #elif defined(PCBX9LITE)
   #define KEYS_GPIO_REG_PAGE            GPIOE->IDR
   #define KEYS_GPIO_PIN_PAGE            GPIO_Pin_8  // PE.08

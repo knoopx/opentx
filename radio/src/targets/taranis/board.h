@@ -247,10 +247,10 @@ enum EnumKeys
   KEY_COUNT,
   KEY_MAX = KEY_COUNT - 1,
 
-#if defined(ROTARY_ENCODER_NAVIGATION)
+/*#if defined(ROTARY_ENCODER_NAVIGATION)
   KEY_PLUS,
   KEY_MINUS,
-#endif
+#endif*/
 
   TRM_BASE,
   TRM_LH_DWN = TRM_BASE,
