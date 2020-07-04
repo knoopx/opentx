@@ -198,7 +198,7 @@ void lcdRefresh(bool wait)
 
 #if LCD_W == 128
   uint8_t * p = displayBuf;
-  lcdWriteCommand(2 & 0xf);
+  lcdWriteCommand(2);
   for (uint8_t y=0; y < 8; y++, p+=LCD_W) {
     lcdWriteCommand(0x10); // Column addr 0
     lcdWriteCommand(0xB0 | y); // Page addr y
