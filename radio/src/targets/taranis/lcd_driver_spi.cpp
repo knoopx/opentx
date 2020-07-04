@@ -198,6 +198,8 @@ void lcdRefresh(bool wait)
 
 #if LCD_W == 128
   uint8_t * p = displayBuf;
+
+  // add offset 2px because the driver (SH1106) of the 1.3 OLED is for a 132 display. If OLED uses SSD1306, need to remove offset
   lcdWriteCommand(2);
   for (uint8_t y=0; y < 8; y++, p+=LCD_W) {
     lcdWriteCommand(0x10); // Column addr 0
