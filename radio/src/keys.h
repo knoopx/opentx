@@ -67,8 +67,8 @@
   #define EVT_ROTARY_LONG              EVT_KEY_LONG(KEY_ENTER)
   #define EVT_ROTARY_LEFT              0xDF00
   #define EVT_ROTARY_RIGHT             0xDE00
-  #define IS_NEXT_EVENT(event)         (event==EVT_ROTARY_RIGHT)
-  #define IS_PREVIOUS_EVENT(event)     (event==EVT_ROTARY_LEFT)
+  #define IS_NEXT_EVENT(event)         (event==EVT_KEY_FIRST(KEY_DOWN) || event==EVT_KEY_REPT(KEY_DOWN))
+  #define IS_PREVIOUS_EVENT(event)     (event==EVT_KEY_FIRST(KEY_UP) || event==EVT_KEY_REPT(KEY_UP))
 #elif defined(ROTARY_ENCODER_NAVIGATION)
   #define EVT_ROTARY_BREAK             0xcf
   #define EVT_ROTARY_LONG              0xce

@@ -22,13 +22,13 @@
 #include "options.h"
 
 // TODO duplicated code
-#if defined(ROTARY_ENCODER_NAVIGATION)
+/*#if defined(ROTARY_ENCODER_NAVIGATION)
 #define EVT_KEY_NEXT_LINE              EVT_ROTARY_RIGHT
 #define EVT_KEY_PREVIOUS_LINE          EVT_ROTARY_LEFT
-#else
+#else*/
 #define EVT_KEY_NEXT_LINE              EVT_KEY_FIRST(KEY_DOWN)
 #define EVT_KEY_PREVIOUS_LINE          EVT_KEY_FIRST(KEY_UP)
-#endif
+//#endif
 
 #define MENU_BODY_TOP    (FH + 1)
 #define MENU_BODY_BOTTOM (LCD_H)
