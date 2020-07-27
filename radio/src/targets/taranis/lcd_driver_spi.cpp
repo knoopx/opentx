@@ -107,33 +107,41 @@ void lcdHardwareInit()
 #if LCD_W == 128
 void lcdStart()
 {
-//#if defined(RADIO_T12)
-  // Jumper has the screen inverted.
-  lcdWriteCommand(0xe2); // (14) Soft reset
-  lcdWriteCommand(0xa1); // Set seg
-  lcdWriteCommand(0xc8); // Set com
-  lcdWriteCommand(0xf8); // Set booster
-  lcdWriteCommand(0x00); // 5x
-  lcdWriteCommand(0xa3); // Set bias=1/6
-  lcdWriteCommand(0x22); // Set internal rb/ra=5.0
-  lcdWriteCommand(0x2f); // All built-in power circuits on
-  lcdWriteCommand(0x24); // Power control set
-  lcdWriteCommand(0x81); // Set contrast
-  lcdWriteCommand(0x0A); // Set Vop
-  lcdWriteCommand(0xa6); // Set display mode
-/*#else
-  lcdWriteCommand(0xe2); // (14) Soft reset
-  lcdWriteCommand(0xa1); // Set seg
-  lcdWriteCommand(0xc0); // Set com
-  lcdWriteCommand(0xf8); // Set booster
-  lcdWriteCommand(0x00); // 5x
-  lcdWriteCommand(0xa3); // Set bias=1/6
-  lcdWriteCommand(0x22); // Set internal rb/ra=5.0
-  lcdWriteCommand(0x2f); // All built-in power circuits on
-  lcdWriteCommand(0x81); // Set contrast
-  lcdWriteCommand(0x36); // Set Vop
-  lcdWriteCommand(0xa6); // Set display mode
-#endif*/
+  lcdWriteCommand(0xAE); // Set display OFF
+
+  lcdWriteCommand(0xD4); // Set Display Clock Divide Ratio / OSC Frequency
+  lcdWriteCommand(0x80); // Display Clock Divide Ratio / OSC Frequency
+
+  lcdWriteCommand(0xA8); // Set Multiplex Ratio  // Multiplex Ratio for 128x64 (64-1)
+  lcdWriteCommand(0x3F); // Multiplex Ratio for 128x64 (64-1)
+
+  lcdWriteCommand(0xD3); // Set Display Offset
+  lcdWriteCommand(0x00); // Display Offset
+
+  lcdWriteCommand(0x40); // Set Display Start Line
+
+  lcdWriteCommand(0x8D); // Set Charge Pump
+  lcdWriteCommand(0x14); // Charge Pump (0x10 External, 0x14 Internal DC/DC)
+
+
+  lcdWriteCommand(0xA1); // Set Segment Re-Map
+  lcdWriteCommand(0xC8); // Set Com Output Scan Direction
+
+  lcdWriteCommand(0xDA); // Set COM Hardware Configuration
+  lcdWriteCommand(0x12); // COM Hardware Configuration
+
+  lcdWriteCommand(0x81); // Set Contrast
+  lcdWriteCommand(0xCF); // Contrast
+
+  lcdWriteCommand(0xD9); // Set Pre-Charge Period
+  lcdWriteCommand(0xF1); // Set Pre-Charge Period (0x22 External, 0xF1 Internal)
+
+  lcdWriteCommand(0xDB); // Set VCOMH Deselect Level
+  lcdWriteCommand(0x40); // VCOMH Deselect Level
+
+  lcdWriteCommand(0xA4); // Set display not inverted
+  lcdWriteCommand(0xA6); // Set all pixels OFF
+  lcdWriteCommand(0xAF); // Set display On
 }
 #else
 void lcdStart()
