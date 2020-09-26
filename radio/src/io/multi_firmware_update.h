@@ -101,6 +101,11 @@ class MultiFirmwareInformation {
     const char * readV2Signature(const char * buffer);
 };
 
-bool multiFlashFirmware(uint8_t module, const char * filename);
+enum MultiModuleType {
+  MMT_Multi=0,
+  MMT_ELRS,
+};
+
+bool multiFlashFirmware(uint8_t module, const char * filename, MultiModuleType type);
 
 #endif //OPENTX_MULTI_FIRMWARE_H
