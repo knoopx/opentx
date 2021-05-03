@@ -1174,8 +1174,10 @@
   #define LED_GREEN_GPIO_PIN            GPIO_Pin_4  // PC.04
   #define LED_RED_GPIO                  GPIOC
   #define LED_RED_GPIO_PIN              GPIO_Pin_5  // PC.05
+  #if !defined(RADIO_TLITE)
   #define LED_BLUE_GPIO                 GPIOB
   #define LED_BLUE_GPIO_PIN             GPIO_Pin_1  // PB.01
+  #endif
 #elif defined(PCBX9LITES)
   #define STATUS_LEDS
   #define GPIO_LED_GPIO_ON              GPIO_SetBits
